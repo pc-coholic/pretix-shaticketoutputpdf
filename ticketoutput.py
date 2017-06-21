@@ -108,18 +108,21 @@ class PdfTicketOutput(BaseTicketOutput):
                 for p in op.addons.select_related('item', 'variation')
             ])
         elif o['content'] == 'shatax':
-            if (op.item.category.name in ['Tickets', 'Standard tickets', 'Business tickets']):
+            if (op.item.category.name in ['Tickets', 'Standard tickets']):
                 taxtext = []
+                touristtax = Decimal('5.10')
                 if (op.price.compare(Decimal('250.00')) in [Decimal('-1'), Decimal('0')]):
-                    price = Decimal('250.00')
-                    logger.debug('AAAAA')
-                else:
+                    logger.debug('SMALLER THAN 250 EUR')
                     price = op.price
-                    logger.debug('BBBBB')
-                    taxtext.append('Donation: ' + str(round_decimal(price - Decimal('250.00'))) + ' EUR (BTW vrijgesteld)')
+                else:
+                    logger.debug('BIGGER THAN 250 EUR')
+                    price = Decimal('250.00')
+                    taxtext.append('Supporter Donation: ' + str(round_decimal(op.price - Decimal('250.00'))) + ' EUR (BTW vrijgesteld)')
 
-                taxtext.insert(0, 'Camping: ' + str(round_decimal(price * Decimal('0.75'))) + ' EUR (6% BTW)')
-                taxtext.insert(1, 'Event:   ' + str(round_decimal(price * Decimal('0.25'))) + ' EUR (21% BTW)')
+                taxtext.insert(0, 'Toeristenbelasting: ' + str(round_decimal(touristtax)) + ' EUR (BTW vrijgesteld)')
+                price -= touristtax
+                taxtext.insert(1, 'Camping: ' + str(round_decimal(price * Decimal('0.75'))) + ' EUR (6% BTW)')
+                taxtext.insert(2, 'Event:   ' + str(round_decimal(price * Decimal('0.25'))) + ' EUR (21% BTW)')
 
                 return '<br/>\n'.join(taxtext)
             else:
