@@ -8,7 +8,7 @@ from pretix.control.signals import html_head
 
 @receiver(register_ticket_outputs, dispatch_uid="output_shapdf")
 def register_ticket_outputs(sender, **kwargs):
-    from .ticketoutput import PdfTicketOutput
+    from .shaticketoutput import PdfTicketOutput
     return PdfTicketOutput
 
 
