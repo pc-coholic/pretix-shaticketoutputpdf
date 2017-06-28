@@ -1,0 +1,3 @@
+recursive-include pretix_shaticketoutputpdf/static *
+recursive-include pretix_shaticketoutputpdf/templates *
+recursive-include pretix_shaticketoutputpdf/locale *

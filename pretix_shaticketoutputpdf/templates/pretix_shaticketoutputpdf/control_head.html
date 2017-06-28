@@ -1,0 +1,7 @@
+{% load staticfiles %}
+{% load compress %}
+
+{% compress css %}
+    <link type="text/css" rel="stylesheet" href="{% static "pretix_shaticketoutputpdf/editor.css" %}">
+{% endcompress %}
+<link type="text/css" rel="stylesheet" href="{% url "plugins:pretix_shaticketoutputpdf:css" organizer=request.organizer.slug event=request.event.slug %}">
