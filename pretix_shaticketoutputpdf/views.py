@@ -109,7 +109,7 @@ class EditorView(EventPermissionRequiredMixin, ChartContainingView, TemplateView
             return resp
         elif "data" in request.POST:
             if cf:
-                fexisting = request.event.settings.get('shaticketoutput_shapdf_layout', as_type=File)
+                fexisting = request.event.settings.get('ticketoutput_shapdf_background', as_type=File)
                 if fexisting:
                     try:
                         default_storage.delete(fexisting.name)
@@ -119,12 +119,12 @@ class EditorView(EventPermissionRequiredMixin, ChartContainingView, TemplateView
                 # Create new file
                 nonce = get_random_string(length=8)
                 fname = '%s-%s/%s/%s.%s.%s' % (
-                    'event', 'settings', self.request.event.pk, 'shaticketoutput_shapdf_layout', nonce, 'pdf'
+                    'event', 'settings', self.request.event.pk, 'ticketoutput_shapdf_background', nonce, 'pdf'
                 )
                 newname = default_storage.save(fname, cf.file)
-                request.event.settings.set('shaticketoutput_shapdf_background', 'file://' + newname)
+                request.event.settings.set('ticketoutput_shapdf_background', 'file://' + newname)
 
-            request.event.settings.set('shaticketoutput_shapdf_layout', request.POST.get("data"))
+            request.event.settings.set('ticketoutput_shapdf_layout', request.POST.get("data"))
             return JsonResponse({'status': 'ok'})
         return HttpResponseBadRequest()
 
@@ -133,7 +133,7 @@ class EditorView(EventPermissionRequiredMixin, ChartContainingView, TemplateView
         prov = PdfTicketOutput(self.request.event)
         ctx['fonts'] = get_fonts()
         ctx['layout'] = json.dumps(
-            self.request.event.settings.get('shaticketoutput_shapdf_layout', as_type=list)
+            self.request.event.settings.get('ticketoutput_shapdf_layout', as_type=list)
             or prov._default_layout()
         )
         return ctx
