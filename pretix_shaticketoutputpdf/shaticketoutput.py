@@ -122,14 +122,12 @@ class PdfTicketOutput(BaseTicketOutput):
 
                     taxtext.insert(0, 'Toeristenbelasting: ' + str(round_decimal(touristtax)) + ' EUR (BTW vrijgesteld)')
                     price -= touristtax
-                    taxtext.insert(1, 'Camping: ' + str(round_decimal(price * Decimal('0.75'))) + ' EUR (6% BTW)')
 
-                    if (op.price.compare(touristtax + ( price * Decimal('0.75') ) + ( price * Decimal('0.25') ) ) in [Decimal('1')]):
-                        taxtext.insert(2, 'Event:   ' + str(round_decimal(price * Decimal('0.25')) - Decimal('0.01')) + ' EUR (21% BTW)')
-                    elif (op.price.compare(touristtax + ( price * Decimal('0.75') ) + ( price * Decimal('0.25') ) ) in [Decimal('-1')]):
-                        taxtext.insert(2, 'Event:   ' + str(round_decimal(price * Decimal('0.25')) + Decimal('0.01')) + ' EUR (21% BTW)')
-                    else:
-                        taxtext.insert(2, 'Event:   ' + str(round_decimal(price * Decimal('0.25'))) + ' EUR (21% BTW)')
+                    campingfee = round_decimal(price * Decimal('0.75'))
+                    taxtext.insert(1, 'Camping: ' + str(campingfee) + ' EUR (6% BTW)')
+                    price -= campingfee
+                    
+                    taxtext.insert(2, 'Event:   ' + str(price) + ' EUR (21% BTW)')
 
                     return '<br/>\n'.join(taxtext)
                 else:
