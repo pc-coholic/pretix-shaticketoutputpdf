@@ -109,7 +109,7 @@ class PdfTicketOutput(BaseTicketOutput):
             ])
         elif o['content'] == 'shatax':
             try:
-                if (op.item.category.name in ['Tickets', 'Standard tickets']):
+                if (str(op.item.category.name) in ['Tickets', 'Standard tickets']):
                     taxtext = []
                     touristtax = Decimal('5.10')
                     if (op.price.compare(Decimal('250.00')) in [Decimal('-1'), Decimal('0')]):
