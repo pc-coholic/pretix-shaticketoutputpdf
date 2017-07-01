@@ -20,7 +20,7 @@ from pretix.base.models import CachedFile
 from pretix.control.permissions import EventPermissionRequiredMixin
 from pretix.control.views import ChartContainingView
 from pretix.helpers.database import rolledback_transaction
-from pretix_shaticketoutputpdf.signals import get_fonts
+from pretix.plugins.ticketoutputpdf.signals import get_fonts
 
 from .shaticketoutput import PdfTicketOutput
 

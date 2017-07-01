@@ -26,7 +26,7 @@ from reportlab.platypus import Paragraph
 
 from pretix.base.models import Order, OrderPosition
 from pretix.base.ticketoutput import BaseTicketOutput
-from pretix_shaticketoutputpdf.signals import get_fonts
+from pretix.plugins.ticketoutputpdf.signals import get_fonts
 
 from decimal import Decimal
 from pretix.base.decimal import round_decimal
