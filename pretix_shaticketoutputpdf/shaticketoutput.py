@@ -115,19 +115,21 @@ class PdfTicketOutput(BaseTicketOutput):
                     if (op.price.compare(Decimal('250.00')) in [Decimal('-1'), Decimal('0')]):
                         logger.debug('SMALLER THAN 250 EUR')
                         price = op.price
+                        taxtext.append('')
                     else:
                         logger.debug('BIGGER THAN 250 EUR')
                         price = Decimal('250.00')
                         taxtext.append('Supporter Donation: ' + str(round_decimal(op.price - Decimal('250.00'))) + ' EUR (BTW vrijgesteld)')
 
-                    taxtext.insert(0, 'Toeristenbelasting: ' + str(round_decimal(touristtax)) + ' EUR (BTW vrijgesteld)')
                     price -= touristtax
 
                     campingfee = round_decimal(price * Decimal('0.75'))
-                    taxtext.insert(1, 'Camping: ' + str(campingfee) + ' EUR (6% BTW)')
+                    taxtext.insert(0, 'Camping: ' + str(campingfee) + ' EUR (6% BTW)')
                     price -= campingfee
                     
-                    taxtext.insert(2, 'Event:   ' + str(price) + ' EUR (21% BTW)')
+                    taxtext.insert(1, 'Event:   ' + str(price) + ' EUR (21% BTW)')
+                    
+                    taxtext.insert(2, 'Toeristenbelasting: ' + str(round_decimal(touristtax)) + ' EUR (BTW vrijgesteld)')
 
                     return '<br/>\n'.join(taxtext)
                 else:
