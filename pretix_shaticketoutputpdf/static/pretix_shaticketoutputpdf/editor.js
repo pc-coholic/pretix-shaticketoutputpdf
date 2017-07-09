@@ -175,7 +175,7 @@ var editor = {
         "event_admission": gettext("2017-05-31 19:00"),
         "event_location": gettext("Random City"),
         "addons": gettext("Addon 1\nAddon 2"),
-        "shatax": gettext("Camping: 183.68 EUR (6% BTW)\nEvent: 61.22 EUR (21% BTW)\nToeristenbelasting: 5.10 EUR (BTW vrijgesteld)\nSupporter Donation: 50.00 EUR (BTW vrijgesteld)"),
+        "shatax": gettext("Camping: 183.68 EUR (6% BTW)\nEvent: 61.22 EUR (21% BTW)\nToeristenbelasting: 5.10 EUR (BTW vrijgesteld)\nSupporter Donation: 50.00 EUR (BTW vrijgesteld)\nTotal: 250.00 EUR"),
     },
 
     _load_pdf: function (dump) {
