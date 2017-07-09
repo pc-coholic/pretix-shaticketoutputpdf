@@ -130,12 +130,14 @@ class PdfTicketOutput(BaseTicketOutput):
                     taxtext.insert(1, 'Event:   ' + str(price) + ' EUR (21% BTW)')
                     
                     taxtext.insert(2, 'Toeristenbelasting: ' + str(round_decimal(touristtax)) + ' EUR (BTW vrijgesteld)')
+                                        
+                    taxtext.append('Total: ' + str(round_decimal(op.price)) + ' EUR')
 
                     return '<br/>\n'.join(taxtext)
                 else:
-                    return 'Total: ' + str(round_decimal(op.price)) + ' EUR (21% BTW)'
+                    return '<br/><br/><br/><br/>Total: ' + str(round_decimal(op.price)) + ' EUR (21% BTW)'
             except:
-                return 'Total: ' + str(round_decimal(op.price)) + ' EUR (21% BTW)'
+                return '<br/><br/><br/><br/>Total: ' + str(round_decimal(op.price)) + ' EUR (21% BTW)'
         return ''
 
     def _draw_textarea(self, canvas: Canvas, op: OrderPosition, order: Order, o: dict):
