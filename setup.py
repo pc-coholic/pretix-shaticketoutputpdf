@@ -25,7 +25,7 @@ cmdclass = {
 
 setup(
     name='pretix-shaticketoutputpdf',
-    version='1.0.0',
+    version='1.0.1',
     description='This plugin allows you to print out tickets as PDF files - with the addition of SHA-related tax-stuff',
     long_description=long_description,
     url='https://github.com/pc-coholic/pretix-shaticketoutputpdf',
